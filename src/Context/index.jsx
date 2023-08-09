@@ -4,6 +4,7 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({children}) => {
   const [ count, setCount ] = useState( 0 );
+  const [, setCount] = useState(0);
 
 
   const increment = () => {
