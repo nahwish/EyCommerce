@@ -25,8 +25,8 @@ function Home() {
       <Layout>
         Home!!
         <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {items?.map(({ category,images,title,price },index) => (
-          <Card category={category} images={images} title={title} key={index} price={price}/>
+        {items?.map(({ category,images,title,price,id },index) => (
+          <Card category={category} images={images} title={title} key={index} price={price} id={id}/>
         ))}
 
         </div>
