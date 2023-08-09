@@ -7,18 +7,25 @@ const Card = (props) => {
   const {
     increment,
     openProductDetail,
+    closeProductDetail,
     setProductToShow,
     setCartProduct,
     cartProduct,
+    openCheckoutMenu,
+    closeCheckoutMenu,
   } = useContext(ShoppingCartContext);
 
   const showProduct = (productData) => {
+    closeCheckoutMenu();
     openProductDetail();
     setProductToShow(productData);
   };
   const AddProductToCart = (product) => {
     setCartProduct([...cartProduct, product]);
     increment();
+    closeProductDetail();
+    openCheckoutMenu();
+    
   };
 console.log(cartProduct)
   return (
