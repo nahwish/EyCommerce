@@ -3,6 +3,8 @@ const OrderCard = ( props ) => {
   const { id, title, images, price } = props.product;
   const { handleDelete  } = props;
   let renderIcon;
+
+  
   if(handleDelete ){
     renderIcon = (
       <svg

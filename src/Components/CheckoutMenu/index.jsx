@@ -13,9 +13,21 @@ const CheckoutMenu = () => {
     const filteredProducts = cartProduct.filter((product) => product.id != id);
     setCartProduct(filteredProducts);
   };
+  const fechaActual = new Date();
+
+  const dia = fechaActual.getDate();
+  const mes = fechaActual.getMonth() + 1; 
+  const anio = fechaActual.getFullYear();
+
+  const fechaFormateada = `${dia < 10 ? "0" : ""}${dia}/${
+    mes < 10 ? "0" : ""
+  }${mes}/${anio}`;
+
+
+
   const handleCheckout = () =>{
     const orderToAdd = {
-      date: "01.02.23",
+      date: fechaFormateada,
       products: cartProduct,
       totalProducts: cartProduct.length,
       totalPrice: totalPrice(cartProduct),
