@@ -1,16 +1,28 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
+import {totalPrice} from "../../utils";
 import "./styles.css";
 
 const CheckoutMenu = () => {
-  const { isCheckoutMenuOpen, closeCheckoutMenu, cartProduct, setCartProduct } =
+  const { isCheckoutMenuOpen, closeCheckoutMenu, cartProduct, setCartProduct,setOrder,order } =
     useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
     const filteredProducts = cartProduct.filter((product) => product.id != id);
     setCartProduct(filteredProducts);
   };
+  const handleCheckout = () =>{
+    const orderToAdd = {
+      date: "01.02.23",
+      products: cartProduct,
+      totalProducts: cartProduct.length,
+      totalPrice: totalPrice(cartProduct),
+    };
+      setOrder([...order,orderToAdd]);
+      setCartProduct([]);
+  }
 
   return (
     <aside
@@ -37,7 +49,7 @@ const CheckoutMenu = () => {
           </svg>
         </div>
       </div>
-      <div className="px-6 overflow-y-scroll">
+      <div className="px-6 overflow-y-scroll flex-1 ">
         {cartProduct.map((product) => (
           <OrderCard
             product={product}
@@ -47,8 +59,23 @@ const CheckoutMenu = () => {
           />
         ))}
       </div>
+      <div className="px-6 mb-5">
+        <p className="flex justify-between items-center ">
+          <span>Total:</span>
+          <span>{totalPrice(cartProduct)}</span>
+        </p>
+        <Link to="/my-orders/last">
+        <button
+          className="bg-black py-3 w-full text-white rounded "
+          onClick={() => handleCheckout()}
+        >
+          Checkout
+        </button>
+        </Link>
+      </div>
     </aside>
   );
 };
+        
 
 export default CheckoutMenu;

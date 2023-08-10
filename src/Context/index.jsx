@@ -17,6 +17,9 @@ export const ShoppingCartProvider = ({children}) => {
   const [ productToShow,setProductToShow ] = useState({})
   //ShoppingCart
   const [cartProduct, setCartProduct] = useState([]);
+  
+  // Order
+  const [order, setOrder] = useState([]);
 
   const increment = () => {
     setCount( count + 1 )
@@ -35,6 +38,8 @@ export const ShoppingCartProvider = ({children}) => {
     openCheckoutMenu,
     closeCheckoutMenu,
     isCheckoutMenuOpen,
+    setOrder,
+    order,
   };
   return (
     <ShoppingCartContext.Provider value={contextValue }>

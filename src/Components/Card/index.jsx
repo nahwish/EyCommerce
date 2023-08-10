@@ -57,7 +57,6 @@ const Card = (props) => {
       return (
         <button
           className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-700 text-slate-300 border-slate-900"
-          
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
