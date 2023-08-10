@@ -1,5 +1,5 @@
 export const directionLink = [
-  {name:"Shopi",url:"/shopi"}, 
+  {name:"Shopi",url:"/"}, 
   {name:"All",url:"/all"}, 
   {name:"Clothes",url:"/clothes"}, 
   {name:"Electronics",url:"/electronics"}, 
