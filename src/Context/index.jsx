@@ -17,11 +17,21 @@ export const ShoppingCartProvider = ({ children }) => {
   const [productToShow, setProductToShow] = useState({});
   //ShoppingCart
   const [cartProduct, setCartProduct] = useState([]);
-
   // Order
   const [order, setOrder] = useState([]);
   //get Products
   const [items, setItems] = useState([]);
+  const [filteredItems, setfilteredItems] = useState([]);
+  // Search
+  const [search, setSearch] = useState("");
+
+  const filteredItemsByTitle = (items, search) => items?.filter(item => item.title.toLowerCase().includes(search.toLowerCase()));
+
+  useEffect(()=>{
+    if(search) setfilteredItems(filteredItemsByTitle(items,search));
+  },[items,search])
+
+
   const API = "https://api.escuelajs.co/api/v1/products";
   useEffect(() => {
     try {
@@ -57,6 +67,9 @@ export const ShoppingCartProvider = ({ children }) => {
     order,
     items,
     setItems,
+    search,
+    setSearch,
+    filteredItems,
   };
   return (
     <ShoppingCartContext.Provider value={contextValue}>
