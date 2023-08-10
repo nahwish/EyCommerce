@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import "./styles.css"
+import "./styles.css";
 
-const ProductDetail = ( ) =>{
-   const {isProductDetailOpen,closeProductDetail,productToShow } = useContext(ShoppingCartContext);
-   console.log(productToShow)
+const ProductDetail = () => {
+  const { isProductDetailOpen, closeProductDetail, productToShow } =
+    useContext(ShoppingCartContext);
+
   return (
     <aside
       className={`${
@@ -43,6 +44,6 @@ const ProductDetail = ( ) =>{
       </figure>
     </aside>
   );
-}
+};
 
 export default ProductDetail;

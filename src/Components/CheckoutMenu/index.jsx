@@ -4,8 +4,13 @@ import OrderCard from "../OrderCard";
 import "./styles.css";
 
 const CheckoutMenu = () => {
-  const { isCheckoutMenuOpen, closeCheckoutMenu, cartProduct } =
+  const { isCheckoutMenuOpen, closeCheckoutMenu, cartProduct, setCartProduct } =
     useContext(ShoppingCartContext);
+
+  const handleDelete = (id) => {
+    const filteredProducts = cartProduct.filter((product) => product.id != id);
+    setCartProduct(filteredProducts);
+  };
 
   return (
     <aside
@@ -33,8 +38,14 @@ const CheckoutMenu = () => {
         </div>
       </div>
       <div className="px-6 overflow-y-scroll">
-
-      {cartProduct.map((product)=> <OrderCard product={product} key={product.id}/>)}
+        {cartProduct.map((product) => (
+          <OrderCard
+            product={product}
+            key={product.id}
+            handleDelete={handleDelete}
+            id={product.id}
+          />
+        ))}
       </div>
     </aside>
   );
