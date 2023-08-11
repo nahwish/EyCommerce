@@ -23,13 +23,24 @@ export const ShoppingCartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [filteredItems, setfilteredItems] = useState([]);
   // Search
-  const [search, setSearch] = useState("");
+  const [searchByTitle, setSearchByTitle] = useState("");
+  const [searchByCategory, setSearchByCategory] = useState("");
 
-  const filteredItemsByTitle = (items, search) => items?.filter(item => item.title.toLowerCase().includes(search.toLowerCase()));
+  const filteredItemsByTitle = (items, searchtitle) =>
+    items?.filter((item) =>
+      item.title.toLowerCase().includes(searchtitle.toLowerCase())
+    );
+  const filteredItemsByCategory = (items, searchCategory) =>
+    items?.filter((item) =>
+      item.category.name.toLowerCase().includes(searchCategory.toLowerCase())
+    );
 
-  useEffect(()=>{
-    if(search) setfilteredItems(filteredItemsByTitle(items,search));
-  },[items,search])
+  useEffect(() => {
+    if (searchByTitle)
+      setfilteredItems(filteredItemsByTitle(items, searchByTitle));
+    if (searchByCategory)
+      setfilteredItems(filteredItemsByCategory(items, searchByCategory));
+  }, [items, searchByTitle, searchByCategory]);
 
 
   const API = "https://api.escuelajs.co/api/v1/products";
@@ -67,9 +78,11 @@ export const ShoppingCartProvider = ({ children }) => {
     order,
     items,
     setItems,
-    search,
-    setSearch,
+    setSearchByTitle,
+    searchByTitle,
     filteredItems,
+    searchByCategory,
+    setSearchByCategory,
   };
   return (
     <ShoppingCartContext.Provider value={contextValue}>
