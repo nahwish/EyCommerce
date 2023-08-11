@@ -9,7 +9,7 @@ function Home() {
     useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if (searchByTitle?.length > 0) {
+    
       if (filteredItems?.length > 0) {
         return filteredItems?.map(
           ({ category, images, title, price, id }, index) => (
@@ -26,18 +26,6 @@ function Home() {
       } else {
         return <div>No existe</div>;
       }
-    } else {
-      return items?.map(({ category, images, title, price, id }, index) => (
-        <Card
-          category={category}
-          images={images}
-          title={title}
-          key={index}
-          price={price}
-          id={id}
-        />
-      ));
-    }
   };
   return (
     <>
