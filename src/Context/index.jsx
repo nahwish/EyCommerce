@@ -34,14 +34,42 @@ export const ShoppingCartProvider = ({ children }) => {
     items?.filter((item) =>
       item.category.name.toLowerCase().includes(searchCategory.toLowerCase())
     );
-
+console.log("items:",items)
+  const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+    if (searchType === "BY_TITLE") {
+      return filteredItemsByTitle(items, searchByTitle);
+    }
+    if (searchType === "BY_CATEGORY") {
+      return filteredItemsByCategory(items, searchByCategory);
+    }
+    if (searchType === "BY_TITLE_AND_CATEGORY") {
+      return filteredItemsByTitle(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+    if(!searchType){
+      return items;
+    }
+  };
   useEffect(() => {
-    if (searchByTitle)
-      setfilteredItems(filteredItemsByTitle(items, searchByTitle));
-    if (searchByCategory)
-      setfilteredItems(filteredItemsByCategory(items, searchByCategory));
+    if (searchByTitle && !searchByCategory)
+      setfilteredItems(
+        filterBy("BY_TITLE", items, searchByTitle, searchByCategory)
+      );
+    if (searchByTitle && searchByCategory)
+      setfilteredItems(
+        filterBy(
+          "BY_TITLE_AND_CATEGORY",
+          items,
+          searchByTitle,
+          searchByCategory
+        )
+      );
+    if (searchByCategory && !searchByTitle)
+      setfilteredItems(
+        filterBy("BY_CATEGORY", items, searchByTitle, searchByCategory)
+      );
+    if (!searchByCategory && !searchByTitle)
+      setfilteredItems(filterBy(null, items, searchByTitle, searchByCategory));
   }, [items, searchByTitle, searchByCategory]);
-
 
   const API = "https://api.escuelajs.co/api/v1/products";
   useEffect(() => {
@@ -49,6 +77,7 @@ export const ShoppingCartProvider = ({ children }) => {
       async function fetchData(URL) {
         let result = await fetch(URL);
         let data = await result.json();
+        console.log("useEffect:", data)
         setItems(data);
       }
       fetchData(API);
