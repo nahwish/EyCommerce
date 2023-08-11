@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context/index";
 import { directionLink, activeLinkAcount } from "./urls";
 
 const NavBar = () => {
-  const { count } = useContext(ShoppingCartContext);
+  const { count, setSearchByCategory } = useContext(ShoppingCartContext);
   const activeStyle = "underline underline-offset-4";
 
   return (
@@ -15,6 +15,7 @@ const NavBar = () => {
             <NavLink
               to={url}
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => setSearchByCategory(url.name.toLowerCase())}
             >
               {name}
             </NavLink>

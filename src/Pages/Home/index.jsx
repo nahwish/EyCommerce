@@ -5,28 +5,28 @@ import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
-  const { items, setSearch, search, filteredItems } =
+  const { items, setSearchByTitle, searchByTitle, filteredItems } =
     useContext(ShoppingCartContext);
 
-  const renderView = () =>{
-    if(search?.length > 0){
-      if( filteredItems?.length > 0){
-        return filteredItems?.map(({ category, images, title, price, id }, index) => (
-          <Card
-            category={category}
-            images={images}
-            title={title}
-            key={index}
-            price={price}
-            id={id}
-          />
-        ))
-
-      }else{
-        return <div>No existe</div>
+  const renderView = () => {
+    if (searchByTitle?.length > 0) {
+      if (filteredItems?.length > 0) {
+        return filteredItems?.map(
+          ({ category, images, title, price, id }, index) => (
+            <Card
+              category={category}
+              images={images}
+              title={title}
+              key={index}
+              price={price}
+              id={id}
+            />
+          )
+        );
+      } else {
+        return <div>No existe</div>;
       }
-     
-    }else{
+    } else {
       return items?.map(({ category, images, title, price, id }, index) => (
         <Card
           category={category}
@@ -38,8 +38,7 @@ function Home() {
         />
       ));
     }
-
-  }
+  };
   return (
     <>
       <Layout>
@@ -50,7 +49,7 @@ function Home() {
           type="text"
           placeholder="Buscar"
           className="rounded border border-black w-80 p-4 mb-4 focus:outline-none"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearchByTitle(e.target.value)}
         />
         <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
           {renderView()}
