@@ -1,11 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 
-export const ShoppingCartContext = createContext();
+export const CheckoutContext = createContext();
 
-export const ShoppingCartProvider = ({ children }) => {
-  // Increment quantity
-  const [count, setCount] = useState(0);
-  // Product detail
+export const CheckoutContextProvider = ({ children }) => {
+
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
   const openProductDetail = () => setIsProductDetailOpen(true);
   const closeProductDetail = () => setIsProductDetailOpen(false);
@@ -15,9 +13,6 @@ export const ShoppingCartProvider = ({ children }) => {
   const closeCheckoutMenu = () => setIsCheckoutMenuOpen(false);
   //ShowProduct
   const [productToShow, setProductToShow] = useState({});
-  //ShoppingCart
-  const [cartProduct, setCartProduct] = useState([]);
-  // Order
   const [order, setOrder] = useState([]);
   //get Products
   const [items, setItems] = useState([]);
@@ -34,7 +29,7 @@ export const ShoppingCartProvider = ({ children }) => {
     items?.filter((item) =>
       item.category.name.toLowerCase().includes(searchCategory.toLowerCase())
     );
-console.log("items:",items)
+  console.log("items:", items);
   const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
     if (searchType === "BY_TITLE") {
       return filteredItemsByTitle(items, searchByTitle);
@@ -43,9 +38,11 @@ console.log("items:",items)
       return filteredItemsByCategory(items, searchByCategory);
     }
     if (searchType === "BY_TITLE_AND_CATEGORY") {
-      return filteredItemsByTitle(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+      return filteredItemsByTitle(items, searchByCategory).filter((item) =>
+        item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+      );
     }
-    if(!searchType){
+    if (!searchType) {
       return items;
     }
   };
@@ -77,7 +74,7 @@ console.log("items:",items)
       async function fetchData(URL) {
         let result = await fetch(URL);
         let data = await result.json();
-        console.log("useEffect:", data)
+        console.log("useEffect:", data);
         setItems(data);
       }
       fetchData(API);
@@ -86,20 +83,10 @@ console.log("items:",items)
     }
   }, []);
 
-  const increment = () => {
-    setCount(count + 1);
-  };
-
   const contextValue = {
-    increment,
-    count,
     openProductDetail,
-    closeProductDetail,
-    isProductDetailOpen,
     productToShow,
     setProductToShow,
-    cartProduct,
-    setCartProduct,
     openCheckoutMenu,
     closeCheckoutMenu,
     isCheckoutMenuOpen,
@@ -114,8 +101,8 @@ console.log("items:",items)
     setSearchByCategory,
   };
   return (
-    <ShoppingCartContext.Provider value={contextValue}>
+    <CheckoutContext.Provider value={contextValue}>
       {children}
-    </ShoppingCartContext.Provider>
+    </CheckoutContext.Provider>
   );
 };

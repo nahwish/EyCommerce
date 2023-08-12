@@ -2,11 +2,11 @@ import { useContext } from "react";
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
-import { ShoppingCartContext } from "../../Context";
+import { CheckoutContext } from "../../Context";
 
 function Home() {
   const { items, setSearchByTitle, searchByTitle, filteredItems } =
-    useContext(ShoppingCartContext);
+    useContext(CheckoutContext);
 
   const renderView = () => {
     

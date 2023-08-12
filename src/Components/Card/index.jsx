@@ -1,37 +1,31 @@
 import { useContext } from "react";
-import { ShoppingCartContext } from "../../Context/index";
+import { CheckoutContext } from "../../Context/index";
+import { ShoppingCartContext } from "../../Context/cartContext";
 
 const Card = (props) => {
-  const { category, images, title, price,id } = props;
+  const { category, images, title, price, id } = props;
   const { name } = category;
-  const {
-    increment,
-    openProductDetail,
-    closeProductDetail,
-    setProductToShow,
-    setCartProduct,
-    cartProduct,
-    openCheckoutMenu,
-    closeCheckoutMenu,
-  } = useContext(ShoppingCartContext);
+  const {openProductDetail,setProductToShow,closeCheckoutMenu} = useContext(CheckoutContext);
+  const { cartProduct, AddProductToCart } = useContext(ShoppingCartContext);
 
   const showProduct = (productData) => {
     closeCheckoutMenu();
     openProductDetail();
     setProductToShow(productData);
   };
-  const AddProductToCart = (product) => {
-    setCartProduct([...cartProduct, product]);
-    increment();
-    closeProductDetail();
-    openCheckoutMenu();
-    
-  };
-  
-  const renderIcon = (id) =>{
-    const isInCart = cartProduct.filter(product => product.id == id).length > 0;
+  // const AddProductToCart = (product) => {
+  //   setCartProduct([...cartProduct, product]);
+  //   increment();
+  //   closeProductDetail();
+  //   openCheckoutMenu();
 
-    if(!isInCart){
+  // };
+
+  const renderIcon = (id) => {
+    const isInCart =
+      cartProduct?.filter((product) => product.id == id).length > 0;
+
+    if (!isInCart) {
       return (
         <button
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 "
@@ -53,11 +47,9 @@ const Card = (props) => {
           </svg>
         </button>
       );
-    }else{
+    } else {
       return (
-        <button
-          className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-700 text-slate-300 border-slate-900"
-        >
+        <button className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-700 text-slate-300 border-slate-900">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -75,8 +67,7 @@ const Card = (props) => {
         </button>
       );
     }
-
-  }
+  };
 
   return (
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">

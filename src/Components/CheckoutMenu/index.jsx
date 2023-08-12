@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCartContext } from "../../Context";
+import { CheckoutContext } from "../../Context";
+import { ShoppingCartContext } from "../../Context/cartContext";
 import OrderCard from "../OrderCard";
 import {totalPrice} from "../../utils";
 import "./styles.css";
 
 const CheckoutMenu = () => {
-  const { isCheckoutMenuOpen, closeCheckoutMenu, cartProduct, setCartProduct,setOrder,order } =
-    useContext(ShoppingCartContext);
+  const { isCheckoutMenuOpen, closeCheckoutMenu, setOrder, order } =
+    useContext(CheckoutContext);
+      const { cartProduct, setCartProduct } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
     const filteredProducts = cartProduct.filter((product) => product.id != id);
