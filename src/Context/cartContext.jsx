@@ -1,22 +1,33 @@
-import { createContext,useState,useContext } from "react";
-import {CheckoutContext} from "./index";
+import { createContext, useState, useContext } from "react";
+import { CheckoutContext } from "./index";
 export const ShoppingCartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-  const { openCheckoutMenu } = useContext(CheckoutContext);
+  const { openCheckoutMenu, closeCheckoutMenu } = useContext(CheckoutContext);
   // Increment quantity
   const [count, setCount] = useState(0);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
   //ShoppingCart
   const [cartProduct, setCartProduct] = useState([]);
+  //ShowProduct
+  const [productToShow, setProductToShow] = useState({});
   const closeProductDetail = () => setIsProductDetailOpen(false);
-  const increment = () => setCount(count + 1);
+
+
+  // const increment = () => setCount(count + 1);
 
   const AddProductToCart = (product) => {
+    setCount(count + 1);
     setCartProduct([...cartProduct, product]);
-    increment();
+    // increment();
     closeProductDetail();
     openCheckoutMenu();
+  };
+
+  const showProduct = (productData) => {
+    closeCheckoutMenu();
+    setIsProductDetailOpen(true);
+    setProductToShow(productData);
   };
 
   const contextValue = {
@@ -26,6 +37,9 @@ const CartContextProvider = ({ children }) => {
     setIsProductDetailOpen,
     cartProduct,
     setCartProduct,
+    showProduct,
+    productToShow,
+    closeProductDetail,
   };
 
   return (

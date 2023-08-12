@@ -7,6 +7,7 @@ import NotFound from "../NotFound";
 import Signin from "../Signin";
 import NavBar from "../../Components/NavBar";
 import { CheckoutContextProvider } from "../../Context";
+import { FilterProductProvider } from "../../Context/filterProductContext";
 import CartContextProvider  from "../../Context/cartContext";
 import CheckoutMenu from "../../Components/CheckoutMenu";
 import "./App.css";
@@ -30,6 +31,7 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
+    <FilterProductProvider>
       <CheckoutContextProvider>
     <CartContextProvider>
       <BrowserRouter>
@@ -39,6 +41,8 @@ const App = () => {
       </BrowserRouter>
     </CartContextProvider>
       </CheckoutContextProvider>
+
+    </FilterProductProvider>
 
   );
 };

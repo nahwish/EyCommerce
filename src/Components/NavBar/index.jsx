@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { CheckoutContext } from "../../Context/index";
+import { ShoppingCartContext } from "../../Context/cartContext";
 import { directionLink, activeLinkAcount } from "./urls";
 
 const NavBar = () => {
-  const { count, setSearchByCategory } = useContext(CheckoutContext);
+  const {  setSearchByCategory } = useContext(CheckoutContext);
+  const { count } = useContext(ShoppingCartContext);
   const activeStyle = "underline underline-offset-4";
 
   return (

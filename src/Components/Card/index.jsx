@@ -5,14 +5,16 @@ import { ShoppingCartContext } from "../../Context/cartContext";
 const Card = (props) => {
   const { category, images, title, price, id } = props;
   const { name } = category;
-  const {openProductDetail,setProductToShow,closeCheckoutMenu} = useContext(CheckoutContext);
-  const { cartProduct, AddProductToCart } = useContext(ShoppingCartContext);
+  // const {openProductDetail,setProductToShow,closeCheckoutMenu} = useContext(CheckoutContext);
+  const { cartProduct, AddProductToCart, showProduct } =
+    useContext(ShoppingCartContext);
 
-  const showProduct = (productData) => {
-    closeCheckoutMenu();
-    openProductDetail();
-    setProductToShow(productData);
-  };
+
+  // const showProduct = (productData) => {
+  //   closeCheckoutMenu();
+  //   openProductDetail();
+  //   setProductToShow(productData);
+  // };
   // const AddProductToCart = (product) => {
   //   setCartProduct([...cartProduct, product]);
   //   increment();

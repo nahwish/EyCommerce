@@ -3,11 +3,11 @@ import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
 import { CheckoutContext } from "../../Context";
+import { FilterProductContext } from "../../Context/filterProductContext";
 
 function Home() {
-  const { items, setSearchByTitle, searchByTitle, filteredItems } =
-    useContext(CheckoutContext);
 
+  const { filteredItems, setSearchByTitle } = useContext(FilterProductContext);  
   const renderView = () => {
     
       if (filteredItems?.length > 0) {
