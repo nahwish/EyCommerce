@@ -2,13 +2,13 @@ import Layout from "../../Components/Layout";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import OrderCard from "../../Components/OrderCard";
-import { ShoppingCartContext } from "../../Context";
+import { CheckoutContext } from "../../Context/checkoutContext";
 
 function MyOrder() {
-    const { order } = useContext(ShoppingCartContext);
-    const currentPath = window.location.pathname;
-    let index = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-    if(index == "last") index = order?.length -1;
+  const { order } = useContext(CheckoutContext);
+  const currentPath = window.location.pathname;
+  let index = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+  if (index == "last") index = order?.length - 1;
 
   return (
     <>

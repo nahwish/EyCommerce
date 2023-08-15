@@ -6,7 +6,9 @@ import MyOrders from "../Myorders";
 import NotFound from "../NotFound";
 import Signin from "../Signin";
 import NavBar from "../../Components/NavBar";
-import { ShoppingCartProvider } from "../../Context";
+import { CheckoutContextProvider } from "../../Context/checkoutContext";
+import { FilterProductProvider } from "../../Context/filterProductContext";
+import CartContextProvider from "../../Context/cartContext";
 import CheckoutMenu from "../../Components/CheckoutMenu";
 import "./App.css";
 
@@ -29,13 +31,17 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
-      <BrowserRouter>
-        <AppRoutes />
-        <NavBar />
-        <CheckoutMenu/>
-      </BrowserRouter>
-    </ShoppingCartProvider>
+    <FilterProductProvider>
+      <CheckoutContextProvider>
+        <CartContextProvider>
+          <BrowserRouter>
+            <AppRoutes />
+            <NavBar />
+            <CheckoutMenu />
+          </BrowserRouter>
+        </CartContextProvider>
+      </CheckoutContextProvider>
+    </FilterProductProvider>
   );
 };
 

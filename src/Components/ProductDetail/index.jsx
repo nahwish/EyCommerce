@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import { ShoppingCartContext } from "../../Context";
+import { CheckoutContext } from "../../Context/checkoutContext";
+import { ShoppingCartContext } from "../../Context/cartContext";
 import "./styles.css";
 
 const ProductDetail = () => {
-  const { isProductDetailOpen, closeProductDetail, productToShow } =
+
+  const { isProductDetailOpen, productToShow, closeProductDetail } =
     useContext(ShoppingCartContext);
 
   return (

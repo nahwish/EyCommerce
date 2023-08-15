@@ -1,32 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Layout from "../../Components/Layout";
-import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
-import { ShoppingCartContext } from "../../Context";
+import { FilterProductContext } from "../../Context/filterProductContext";
+import CardHomeView from "../../Components/Home/CardHomeView";
 
 function Home() {
-  const { items, setSearchByTitle, searchByTitle, filteredItems } =
-    useContext(ShoppingCartContext);
+  const { setSearchByTitle, setItems } = useContext(FilterProductContext);
 
-  const renderView = () => {
-    
-      if (filteredItems?.length > 0) {
-        return filteredItems?.map(
-          ({ category, images, title, price, id }, index) => (
-            <Card
-              category={category}
-              images={images}
-              title={title}
-              key={index}
-              price={price}
-              id={id}
-            />
-          )
-        );
-      } else {
-        return <div>No existe</div>;
+  const API = "https://api.escuelajs.co/api/v1/products";
+
+  useEffect(() => {
+    try {
+      async function fetchData(URL) {
+        let result = await fetch(URL);
+        let data = await result.json();
+        console.log("useEffect:", data);
+        setItems(data);
       }
-  };
+      fetchData(API);
+    } catch (error) {
+      console.log("Error ->", error);
+    }
+  }, []);
+
   return (
     <>
       <Layout>
@@ -40,7 +36,7 @@ function Home() {
           onChange={(e) => setSearchByTitle(e.target.value)}
         />
         <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-          {renderView()}
+          <CardHomeView />
         </div>
         <ProductDetail />
       </Layout>
