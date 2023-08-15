@@ -5,21 +5,24 @@ import { ShoppingCartContext } from "../../Context/cartContext";
 import { directionLink, activeLinkAcount } from "./urls";
 
 const NavBar = () => {
-  const { setSearchByCategory } = useContext( CheckoutContext );
-  const { count } = useContext( ShoppingCartContext );
+  const { setSearchByCategory } = useContext(CheckoutContext);
+  const { count } = useContext(ShoppingCartContext);
   const activeStyle = "underline underline-offset-4";
-
+  const handleSignOut = () =>{
+    const stringifiedSignOut = JSON.stringify(true);
+    localStorage.setItem( "sign-out",stringifiedSignOut )
+  }
   return (
     <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0">
       <ul className="flex items-center gap-3">
         {directionLink.map(({ name, url }, index) => (
-          <li className="font-semibold text-lg" key={ index }>
+          <li className="font-semibold text-lg" key={index}>
             <NavLink
-              to={ url }
+              to={url}
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
-              onClick={() => setSearchByCategory( url.name.toLowerCase() )}
+              onClick={() => setSearchByCategory(url.name.toLowerCase())}
             >
-              { name }
+              {name}
             </NavLink>
           </li>
         ))}
@@ -45,6 +48,7 @@ const NavBar = () => {
             <NavLink
               to={url}
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={name == "Sign In" ? () => handleSignOut() : ""}
             >
               {name}
             </NavLink>
@@ -65,7 +69,7 @@ const NavBar = () => {
               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
             />
           </svg>
-          { count }
+          {count}
         </li>
       </ul>
     </nav>
