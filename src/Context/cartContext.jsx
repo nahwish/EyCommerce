@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { CheckoutContext } from "./index";
+import { CheckoutContext } from "./checkoutContext";
 export const ShoppingCartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
@@ -13,13 +13,9 @@ const CartContextProvider = ({ children }) => {
   const [productToShow, setProductToShow] = useState({});
   const closeProductDetail = () => setIsProductDetailOpen(false);
 
-
-  // const increment = () => setCount(count + 1);
-
   const AddProductToCart = (product) => {
     setCount(count + 1);
     setCartProduct([...cartProduct, product]);
-    // increment();
     closeProductDetail();
     openCheckoutMenu();
   };
@@ -48,4 +44,5 @@ const CartContextProvider = ({ children }) => {
     </ShoppingCartContext.Provider>
   );
 };
+
 export default CartContextProvider;

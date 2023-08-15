@@ -1,42 +1,32 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CheckoutContext } from "../../Context";
+import { CheckoutContext } from "../../Context/checkoutContext";
 import { ShoppingCartContext } from "../../Context/cartContext";
 import OrderCard from "../OrderCard";
-import {totalPrice} from "../../utils";
+import { totalPrice } from "../../utils";
+import { FormatDate } from "../../utils/date";
 import "./styles.css";
 
 const CheckoutMenu = () => {
   const { isCheckoutMenuOpen, closeCheckoutMenu, setOrder, order } =
     useContext(CheckoutContext);
-      const { cartProduct, setCartProduct } = useContext(ShoppingCartContext);
+  const { cartProduct, setCartProduct } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
     const filteredProducts = cartProduct.filter((product) => product.id != id);
     setCartProduct(filteredProducts);
   };
-  const fechaActual = new Date();
 
-  const dia = fechaActual.getDate();
-  const mes = fechaActual.getMonth() + 1; 
-  const anio = fechaActual.getFullYear();
-
-  const fechaFormateada = `${dia < 10 ? "0" : ""}${dia}/${
-    mes < 10 ? "0" : ""
-  }${mes}/${anio}`;
-
-
-
-  const handleCheckout = () =>{
+  const handleCheckout = () => {
     const orderToAdd = {
-      date: fechaFormateada,
+      date: FormatDate(),
       products: cartProduct,
       totalProducts: cartProduct.length,
       totalPrice: totalPrice(cartProduct),
     };
-      setOrder([...order,orderToAdd]);
-      setCartProduct([]);
-  }
+    setOrder([...order, orderToAdd]);
+    setCartProduct([]);
+  };
 
   return (
     <aside
@@ -79,17 +69,16 @@ const CheckoutMenu = () => {
           <span>{totalPrice(cartProduct)}</span>
         </p>
         <Link to="/my-orders/last">
-        <button
-          className="bg-black py-3 w-full text-white rounded "
-          onClick={() => handleCheckout()}
-        >
-          Checkout
-        </button>
+          <button
+            className="bg-black py-3 w-full text-white rounded "
+            onClick={() => handleCheckout()}
+          >
+            Checkout
+          </button>
         </Link>
       </div>
     </aside>
   );
 };
-        
 
 export default CheckoutMenu;

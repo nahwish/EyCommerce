@@ -1,14 +1,12 @@
 import { useContext } from "react";
-import { CheckoutContext } from "../../Context";
+import { CheckoutContext } from "../../Context/checkoutContext";
 import { ShoppingCartContext } from "../../Context/cartContext";
 import "./styles.css";
 
 const ProductDetail = () => {
-  // const {  closeProductDetail } =
-  //   useContext(CheckoutContext);
 
-      const { isProductDetailOpen, productToShow, closeProductDetail } =
-        useContext(ShoppingCartContext);
+  const { isProductDetailOpen, productToShow, closeProductDetail } =
+    useContext(ShoppingCartContext);
 
   return (
     <aside

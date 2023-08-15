@@ -6,9 +6,9 @@ import MyOrders from "../Myorders";
 import NotFound from "../NotFound";
 import Signin from "../Signin";
 import NavBar from "../../Components/NavBar";
-import { CheckoutContextProvider } from "../../Context";
+import { CheckoutContextProvider } from "../../Context/checkoutContext";
 import { FilterProductProvider } from "../../Context/filterProductContext";
-import CartContextProvider  from "../../Context/cartContext";
+import CartContextProvider from "../../Context/cartContext";
 import CheckoutMenu from "../../Components/CheckoutMenu";
 import "./App.css";
 
@@ -33,17 +33,15 @@ const App = () => {
   return (
     <FilterProductProvider>
       <CheckoutContextProvider>
-    <CartContextProvider>
-      <BrowserRouter>
-        <AppRoutes />
-        <NavBar />
-        <CheckoutMenu/>
-      </BrowserRouter>
-    </CartContextProvider>
+        <CartContextProvider>
+          <BrowserRouter>
+            <AppRoutes />
+            <NavBar />
+            <CheckoutMenu />
+          </BrowserRouter>
+        </CartContextProvider>
       </CheckoutContextProvider>
-
     </FilterProductProvider>
-
   );
 };
 

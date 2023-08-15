@@ -12,23 +12,8 @@ export const FilterProductProvider = ({ children }) => {
 
   useEffect(() => {
     filter(searchByTitle, searchByCategory, setfilteredItems, items);
-    
   }, [items, searchByTitle, searchByCategory]);
 
-  const API = "https://api.escuelajs.co/api/v1/products";
-  useEffect(() => {
-    try {
-      async function fetchData(URL) {
-        let result = await fetch(URL);
-        let data = await result.json();
-        console.log("useEffect:", data);
-        setItems(data);
-      }
-      fetchData(API);
-    } catch (error) {
-      console.log("Error ->", error);
-    }
-  }, []);
   const contextValue = {
     filteredItems,
     items,
@@ -38,6 +23,7 @@ export const FilterProductProvider = ({ children }) => {
     searchByCategory,
     setSearchByCategory,
   };
+
   return (
     <FilterProductContext.Provider value={contextValue}>
       {children}
