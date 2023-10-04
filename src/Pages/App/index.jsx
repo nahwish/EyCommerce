@@ -10,6 +10,7 @@ import { CheckoutContextProvider } from "../../Context/checkoutContext";
 import { FilterProductProvider } from "../../Context/filterProductContext";
 import CartContextProvider from "../../Context/cartContext";
 import CheckoutMenu from "../../Components/CheckoutMenu";
+import AuthProvider from "../../Context/auth";
 import "./App.css";
 
 const AppRoutes = () => {
@@ -31,17 +32,19 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-          <BrowserRouter>
-    <FilterProductProvider>
-      <CheckoutContextProvider>
-        <CartContextProvider>
-            <NavBar />
-            <AppRoutes />
-            <CheckoutMenu />
-        </CartContextProvider>
-      </CheckoutContextProvider>
-    </FilterProductProvider>
-          </BrowserRouter>
+    <BrowserRouter>
+      <FilterProductProvider>
+        <CheckoutContextProvider>
+          <CartContextProvider>
+            <AuthProvider>
+              <NavBar />
+              <AppRoutes />
+              <CheckoutMenu />
+            </AuthProvider>
+          </CartContextProvider>
+        </CheckoutContextProvider>
+      </FilterProductProvider>
+    </BrowserRouter>
   );
 };
 
