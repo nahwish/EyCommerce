@@ -1,3 +1,4 @@
+"use client"
 import { createContext, useState, useContext } from "react";
 import { CheckoutContext } from "./checkoutContext";
 export const ShoppingCartContext = createContext();
@@ -5,7 +6,7 @@ export const ShoppingCartContext = createContext();
 const CartContextProvider = ({ children }) => {
   const { openCheckoutMenu, closeCheckoutMenu } = useContext(CheckoutContext);
   // Increment quantity
-  const [count, setCount] = useState(0);
+  let [count, setCount] = useState(0);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
   //ShoppingCart
   const [cartProduct, setCartProduct] = useState([]);
@@ -14,7 +15,7 @@ const CartContextProvider = ({ children }) => {
   const closeProductDetail = () => setIsProductDetailOpen(false);
 
   const AddProductToCart = (product) => {
-    setCount(count + 1);
+    setCount(count+1);
     setCartProduct([...cartProduct, product]);
     closeProductDetail();
     openCheckoutMenu();

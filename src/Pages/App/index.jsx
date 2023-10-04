@@ -31,17 +31,17 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
+          <BrowserRouter>
     <FilterProductProvider>
       <CheckoutContextProvider>
         <CartContextProvider>
-          <BrowserRouter>
-            <AppRoutes />
             <NavBar />
+            <AppRoutes />
             <CheckoutMenu />
-          </BrowserRouter>
         </CartContextProvider>
       </CheckoutContextProvider>
     </FilterProductProvider>
+          </BrowserRouter>
   );
 };
 

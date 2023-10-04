@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [signOut, setSignOut] = useState(false);
 
   const valueContext = { account, setAccount, signOut, setSignOut };
+  
   return (
     <AuthContext.Provider value={valueContext}>{children}</AuthContext.Provider>
   );
