@@ -1,12 +1,22 @@
 import React, { useContext } from "react";
 import { ShoppingCartContext } from "../../Context/cartContext";
 
+/**
+ * Componente Button para agregar o quitar un producto del carrito de compras.
+ * @function
+ * @param {Object} props - Las propiedades del componente.
+ * @param {number} id - El ID del producto asociado al botón.
+ * @returns {JSX.Element} Elemento JSX que representa el componente Button.
+ */
+
 const Button = (props, id) => {
   const { AddProductToCart, cartProduct } = useContext(ShoppingCartContext);
-
+  
+  // Comprobar si el producto está en el carrito
   const isInCart =
     cartProduct?.filter((product) => product.id == id).length > 0;
 
+  // Renderizar el botón de acuerdo a si el producto está en el carrito o no
   if (!isInCart) {
     return (
       <button
