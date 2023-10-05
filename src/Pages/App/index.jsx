@@ -43,7 +43,7 @@ const AppRoutes = () => {
         ),
     },
     {
-      path: "/clothes",
+      path: "/shoes",
       element:
         hasUserAnAccount && !isUserSignOut ? (
           <Home />
@@ -87,10 +87,7 @@ const AppRoutes = () => {
           <Navigate replace to={"/sign-in"} />
         ),
     },
-    { path: "/", element: <Home /> },
-    { path: "/clothes", element: <Home /> },
-    { path: "/electronics", element: <Home /> },
-    { path: "/toys", element: <Home /> },
+
     { path: "/my-account", element: <MyAccount /> },
     { path: "/my-order", element: <MyOrder /> },
     { path: "/my-orders", element: <MyOrders /> },

@@ -2,12 +2,14 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CheckoutContext } from "../../Context/checkoutContext";
+import { FilterProductContext } from "../../Context/filterProductContext";
+//FilterProductContext
 import { ShoppingCartContext } from "../../Context/cartContext";
 import { directionLink, activeLinkAcount } from "./urls";
 import { AuthContext } from "../../Context/auth";
 
 const NavBar = () => {
-  const { setSearchByCategory } = useContext(CheckoutContext);
+  const { setSearchByCategory } = useContext(FilterProductContext);
   let { count, cartProduct } = useContext(ShoppingCartContext);
   let context = useContext(AuthContext);
   const activeStyle = "underline underline-offset-4";
@@ -27,7 +29,6 @@ const NavBar = () => {
     ? Object.keys(context.account).length === 0
     : true;
   const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState;
-  console.log("averga", hasUserAnAccount);
 
   const handleSignOut = () => {
     const stringifiedSignOut = JSON.stringify(true);
@@ -85,20 +86,10 @@ const NavBar = () => {
     }
   };
 
-const signIn = (isSignOut,nameUrl) =>{
-  if (isSignOut && nameUrl == "Sign In") {
-    return "/sign-in";
-  } else if (nameUrl != "Sign In") {
-    return nameUrl;
-  }else{
-    return "/";
-  }
-}
-
 
 
   return (
-    <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0">
+    <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0 bg-white">
       <ul className="flex items-center gap-3">
         <li className="font-semibold text-lg">
           <NavLink to={`${isUserSignOut ? "/sign-in" : "/"}`}>Shopi</NavLink>
@@ -114,11 +105,11 @@ const signIn = (isSignOut,nameUrl) =>{
         </li>
         <li>
           <NavLink
-            to="/clothes"
+            to="/shoes"
             onClick={() => setSearchByCategory("clothes")}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            Clothes
+            Shoes
           </NavLink>
         </li>
         <li>
