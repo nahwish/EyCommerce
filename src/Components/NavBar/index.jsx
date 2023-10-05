@@ -1,38 +1,153 @@
-"use client"
+"use client";
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
-import { useContext,useState } from "react";
+import { useContext, useState } from "react";
 import { CheckoutContext } from "../../Context/checkoutContext";
+import { FilterProductContext } from "../../Context/filterProductContext";
+//FilterProductContext
 import { ShoppingCartContext } from "../../Context/cartContext";
 import { directionLink, activeLinkAcount } from "./urls";
+import { AuthContext } from "../../Context/auth";
 
 const NavBar = () => {
-  const { setSearchByCategory } = useContext(CheckoutContext);
+  const { setSearchByCategory } = useContext(FilterProductContext);
   let { count, cartProduct } = useContext(ShoppingCartContext);
+  let context = useContext(AuthContext);
   const activeStyle = "underline underline-offset-4";
-  
-  useEffect(()=>{
-    
-},[])
+
+  // Sign Out
+  const signOut = localStorage.getItem("sign-out");
+  const parsedSignOut = JSON.parse(signOut);
+  const isUserSignOut = context.signOut || parsedSignOut;
+  // Account
+  const account = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(account);
+  // Has an account
+  const noAccountInLocalStorage = parsedAccount
+  ? Object.keys(parsedAccount).length === 0
+  : true;
+  const noAccountInLocalState = context.account
+    ? Object.keys(context.account).length === 0
+    : true;
+  const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState;
+
   const handleSignOut = () => {
     const stringifiedSignOut = JSON.stringify(true);
     localStorage.setItem("sign-out", stringifiedSignOut);
-    useContext.setSignOut(true);
+    context.setSignOut(true);
   };
-  return (
-    <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0">
-      <ul className="flex items-center gap-3">
-        {directionLink.map(({ name, url }, index) => (
-          <li className="font-semibold text-lg" key={index}>
+
+  const renderView = () => {
+    if (hasUserAnAccount && !isUserSignOut) {
+      return (
+        <>
+          <li className="text-black/60">{parsedAccount?.email}</li>
+          <li>
             <NavLink
-              to={url}
+              to="/my-orders"
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
-              onClick={() => setSearchByCategory(url.name.toLowerCase())}
             >
-              {name}
+              My Orders
             </NavLink>
           </li>
-        ))}
+          <li>
+            <NavLink
+              to="/my-account"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Account
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/sign-in"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => handleSignOut()}
+            >
+              Sign out
+            </NavLink>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <li>
+            <NavLink
+              to="/sign-in"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => handleSignOut()}
+            >
+              Sign in
+            </NavLink>
+          </li>
+          
+        </>
+      );
+    }
+  };
+
+
+
+  return (
+    <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-light top-0 bg-white">
+      <ul className="flex items-center gap-3">
+        <li className="font-semibold text-lg">
+          <NavLink to={`${isUserSignOut ? "/sign-in" : "/"}`}>Shopi</NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/"
+            onClick={() => setSearchByCategory()}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            All
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/shoes"
+            onClick={() => setSearchByCategory("clothes")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Shoes
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/electronics"
+            onClick={() => setSearchByCategory("electronics")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Electronics
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/furnitures"
+            onClick={() => setSearchByCategory("furnitures")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Furnitures
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/toys"
+            onClick={() => setSearchByCategory("toys")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Toys
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/others"
+            onClick={() => setSearchByCategory("others")}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Others
+          </NavLink>
+        </li>
       </ul>
       <ul className="flex items-center gap-3">
         <svg
@@ -49,18 +164,7 @@ const NavBar = () => {
             d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
           />
         </svg>
-        <li className="text-black/60">nadaro@outlook.com</li>
-        {activeLinkAcount.map(({ name, url }, index) => (
-          <li className="font-semibold text-lg" key={index}>
-            <NavLink
-              to={url}
-              className={({ isActive }) => (isActive ? activeStyle : undefined)}
-              onClick={name == "Sign In" ? () => handleSignOut() : ""}
-            >
-              {name}
-            </NavLink>
-          </li>
-        ))}
+        {renderView()}
         <li className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -76,9 +180,9 @@ const NavBar = () => {
               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
             />
           </svg>
+          <div>{cartProduct.length}</div>
         </li>
       </ul>
-      <div>{cartProduct.length}</div>
     </nav>
   );
 };

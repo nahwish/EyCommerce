@@ -18,14 +18,19 @@ const CheckoutMenu = () => {
   };
 
   const handleCheckout = () => {
-    const orderToAdd = {
-      date: FormatDate(),
-      products: cartProduct,
-      totalProducts: cartProduct.length,
-      totalPrice: totalPrice(cartProduct),
-    };
-    setOrder([...order, orderToAdd]);
-    setCartProduct([]);
+    if(cartProduct.length != 0){
+      const orderToAdd = {
+        date: FormatDate(),
+        products: cartProduct,
+        totalProducts: cartProduct.length,
+        totalPrice: totalPrice(cartProduct),
+      };
+      setOrder([...order, orderToAdd]);
+      setCartProduct([]);
+      closeCheckoutMenu()
+    }else{
+      closeCheckoutMenu();
+    }
   };
 
   return (
