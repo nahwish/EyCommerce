@@ -1,11 +1,9 @@
 "use client";
 import { NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
-import { CheckoutContext } from "../../Context/checkoutContext";
+import { useContext } from "react";
 import { FilterProductContext } from "../../Context/filterProductContext";
-//FilterProductContext
 import { ShoppingCartContext } from "../../Context/cartContext";
-import { directionLink, activeLinkAcount } from "./urls";
+import { directionLink, signInLinks } from "./urls";
 import { AuthContext } from "../../Context/auth";
 
 const NavBar = () => {
@@ -41,31 +39,20 @@ const NavBar = () => {
       return (
         <>
           <li className="text-black/60">{parsedAccount?.email}</li>
-          <li>
-            <NavLink
-              to="/my-orders"
-              className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              My Orders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-account"
-              className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              My Account
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/sign-in"
-              className={({ isActive }) => (isActive ? activeStyle : undefined)}
-              onClick={() => handleSignOut()}
-            >
-              Sign out
-            </NavLink>
-          </li>
+          {signInLinks.map(({name,url},index)=>{
+            return (
+              <li key={index}>
+                <NavLink
+                  to={url}
+                  className={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                >
+                  {name}
+                </NavLink>
+              </li>
+            );
+          })}
         </>
       );
     } else {
@@ -94,60 +81,23 @@ const NavBar = () => {
         <li className="font-semibold text-lg">
           <NavLink to={`${isUserSignOut ? "/sign-in" : "/"}`}>Shopi</NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/"
-            onClick={() => setSearchByCategory()}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            All
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/shoes"
-            onClick={() => setSearchByCategory("clothes")}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Shoes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/electronics"
-            onClick={() => setSearchByCategory("electronics")}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Electronics
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/furnitures"
-            onClick={() => setSearchByCategory("furnitures")}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Furnitures
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/toys"
-            onClick={() => setSearchByCategory("toys")}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Toys
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/others"
-            onClick={() => setSearchByCategory("others")}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Others
-          </NavLink>
-        </li>
+        {
+          directionLink.map(({name,url,category},index)=>{
+            return (
+              <li key={index}>
+                <NavLink
+                  to={url}
+                  onClick={() => setSearchByCategory(category)}
+                  className={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                >
+                  {name}
+                </NavLink>
+              </li>
+            );
+          })
+        }
       </ul>
       <ul className="flex items-center gap-3">
         <svg

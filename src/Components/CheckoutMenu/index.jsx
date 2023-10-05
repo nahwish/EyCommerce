@@ -7,18 +7,31 @@ import { totalPrice } from "../../utils";
 import { FormatDate } from "../../utils/date";
 import "./styles.css";
 
+
+/**
+ * Componente CheckoutMenu para mostrar y gestionar el carrito de compras y la orden del usuario.
+ * @function
+ * @returns {JSX.Element} Elemento JSX que representa el CheckoutMenu.
+ */
+
 const CheckoutMenu = () => {
   const { isCheckoutMenuOpen, closeCheckoutMenu, setOrder, order } =
     useContext(CheckoutContext);
   const { cartProduct, setCartProduct } = useContext(ShoppingCartContext);
 
+  /**
+   * Maneja la eliminación de un producto del carrito de compras.
+   * @param {number} id - El ID del producto que se va a eliminar.
+   * @returns {void}
+   */
+  
   const handleDelete = (id) => {
     const filteredProducts = cartProduct.filter((product) => product.id != id);
     setCartProduct(filteredProducts);
   };
 
   const handleCheckout = () => {
-    if(cartProduct.length != 0){
+    if (cartProduct.length != 0) {
       const orderToAdd = {
         date: FormatDate(),
         products: cartProduct,
@@ -27,8 +40,8 @@ const CheckoutMenu = () => {
       };
       setOrder([...order, orderToAdd]);
       setCartProduct([]);
-      closeCheckoutMenu()
-    }else{
+      closeCheckoutMenu();
+    } else {
       closeCheckoutMenu();
     }
   };

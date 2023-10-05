@@ -2,11 +2,22 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context/cartContext";
 import Button from "./Button";
 
+/**
+ * Componente Card para mostrar un producto individual.
+ * @function
+ * @param {Object} props - Las propiedades del componente.
+ * @param {Object} props.category - La categoría del producto.
+ * @param {Array} props.images - Las imágenes del producto.
+ * @param {string} props.title - El título del producto.
+ * @param {number} props.price - El precio del producto.
+ * @param {number} props.id - El ID del producto.
+ * @returns {JSX.Element} Elemento JSX que representa el componente Card.
+ */
+
 const Card = (props) => {
   const { category, images, title, price, id } = props;
   const { name } = category;
-  const {  showProduct } = useContext(ShoppingCartContext);
-
+  const { showProduct } = useContext(ShoppingCartContext);
 
   return (
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
@@ -20,7 +31,7 @@ const Card = (props) => {
           src={images[0] ? images[0] : ""}
           alt=""
         />
-        {Button(props,id)}
+        {Button(props, id)}
       </figure>
       <p className="flex justify-between items-center">
         <span className="text-sm font-light">{title}</span>
