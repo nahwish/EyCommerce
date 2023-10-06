@@ -4,10 +4,20 @@ import { Link } from "react-router-dom";
 import OrderCard from "../../Components/OrderCard";
 import { CheckoutContext } from "../../Context/checkoutContext";
 
+/**
+ * Componente que muestra los detalles de un pedido específico o el pedido más reciente.
+ * @component
+ */
+
 function MyOrder() {
+  // Obtiene el estado de los pedidos desde el contexto de checkout.
   const { order } = useContext(CheckoutContext);
+
+  // Obtiene el segmento de la URL actual para determinar qué pedido mostrar.
   const currentPath = window.location.pathname;
   let index = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+
+  // Si el segmento es "last", se muestra el pedido más reciente.
   if (index == "last") index = order?.length - 1;
 
   return (

@@ -2,12 +2,26 @@ import { useContext, useState, useRef } from "react";
 import { AuthContext } from "../../Context/auth";
 import Layout from "../../Components/Layout";
 
+/**
+ * Componente que muestra la información de la cuenta del usuario y permite editarla.
+ * @component
+ */
+
 function MyAccount() {
   const context = useContext(AuthContext);
+
+  // Estado para controlar la vista (información de usuario o edición de información).
   const [view, setView] = useState("user-info");
+
+  // Obtiene los datos de la cuenta del usuario desde el almacenamiento local.
   const account = localStorage.getItem("account");
   const parsedAccount = JSON.parse(account);
+
   const form = useRef(null);
+
+  /**
+   * Función para editar la información de la cuenta del usuario y actualizar el contexto.
+   */
 
   const editAccount = () => {
     const formData = new FormData(form.current);
@@ -17,11 +31,16 @@ function MyAccount() {
       password: formData.get("password"),
     };
 
-    // Update account
+    // Actualiza la cuenta en el almacenamiento local.
     const stringifiedAccount = JSON.stringify(data);
     localStorage.setItem("account", stringifiedAccount);
-    context.setAccount(data);
+    context.setAccount(data); // Actualiza el contexto con los nuevos datos de la cuenta.
   };
+
+  /**
+   * Función que renderiza la vista de información de usuario.
+   * @returns {JSX.Element} - Elemento JSX que muestra la información de usuario.
+   */
 
   const renderUserInfo = () => {
     return (
@@ -43,6 +62,11 @@ function MyAccount() {
       </div>
     );
   };
+
+  /**
+   * Función que renderiza la vista de edición de información de usuario.
+   * @returns {JSX.Element} - Elemento JSX que muestra el formulario de edición.
+   */
 
   const renderEditUserInfo = () => {
     return (
@@ -98,6 +122,11 @@ function MyAccount() {
     );
   };
 
+  /**
+   * Función que decide qué vista renderizar según el estado "view".
+   * @returns {JSX.Element} - Elemento JSX que representa la vista actual.
+   */
+  
   const renderView = () =>
     view === "edit-user-info" ? renderEditUserInfo() : renderUserInfo();
 
