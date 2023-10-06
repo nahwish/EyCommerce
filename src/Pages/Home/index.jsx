@@ -4,22 +4,33 @@ import ProductDetail from "../../Components/ProductDetail";
 import { FilterProductContext } from "../../Context/filterProductContext";
 import CardHomeView from "../../Components/Home/CardHomeView";
 
+/**
+ * Componente que representa la página principal de la aplicación.
+ * @component
+ */
+
 function Home() {
   const { setSearchByTitle, setItems } = useContext(FilterProductContext);
 
   const API = "https://api.escuelajs.co/api/v1/products";
+
+  /**
+   * Función asincrónica para obtener datos de la API y establecer los productos en el contexto de filtrado.
+   * @async
+   * @param {string} URL - URL de la API para obtener productos.
+   */
 
   useEffect(() => {
     try {
       async function fetchData(URL) {
         let result = await fetch(URL);
         let data = await result.json();
-        console.log("useEffect:", data);
+
         setItems(data);
       }
       fetchData(API);
     } catch (error) {
-      console.log("Error ->", error);
+      console.error("Error ->", error);
     }
   }, []);
 

@@ -6,6 +6,12 @@ import { ShoppingCartContext } from "../../Context/cartContext";
 import { directionLink, signInLinks } from "./urls";
 import { AuthContext } from "../../Context/auth";
 
+/**
+ * Componente NavBar para la barra de navegación principal.
+ * @function
+ * @returns {JSX.Element} Elemento JSX que representa el componente NavBar.
+ */
+
 const NavBar = () => {
   const { setSearchByCategory } = useContext(FilterProductContext);
   let { count, cartProduct } = useContext(ShoppingCartContext);
@@ -15,6 +21,11 @@ const NavBar = () => {
   // Sign Out
   const signOut = localStorage.getItem("sign-out");
   const parsedSignOut = JSON.parse(signOut);
+// Calcular si el usuario está "cerrado" o "desconectado".
+// `context.signOut` es una variable del contexto que indica si el usuario está desconectado.
+// Si `context.signOut` es `true`, entonces el usuario está desconectado.
+// Si `parsedSignOut` es `true`, significa que el usuario ha marcado la opción de "cerrar sesión".
+// `isUserSignOut` será `true` si cualquiera de las dos condiciones es `true`.
   const isUserSignOut = context.signOut || parsedSignOut;
   // Account
   const account = localStorage.getItem("account");

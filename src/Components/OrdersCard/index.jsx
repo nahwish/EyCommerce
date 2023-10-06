@@ -1,8 +1,5 @@
 const OrdersCard = (props) => {
-
   const { totalPrice, totalProducts, dateOfOrder } = props;
-
-
 
   return (
     <div className="flex justify-between items-center border border-black p-4 rounded-lg mb-4 w-full">
@@ -22,11 +19,11 @@ const OrdersCard = (props) => {
           />
         </svg>
       </p>
-        <div className="flex flex-col">
-          <span className="font-light">{dateOfOrder}</span>
-          <span className=" font-light">{totalProducts} Articles</span>
-        </div>
-        <span className="font-medium text-2xl">${totalPrice}</span>
+      <div className="flex flex-col">
+        <span className="font-light">{dateOfOrder}</span>
+        <span className=" font-light">{totalProducts} Articles</span>
+      </div>
+      <span className="font-medium text-2xl">${totalPrice}</span>
     </div>
   );
 };
