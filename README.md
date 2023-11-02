@@ -31,18 +31,22 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 Sigue estos pasos para instalar y ejecutar **eyCommercer**:
 
 1. Clona el repositorio:
+
    ```bash
    git clone git@github.com:nahwish/EyCommerce.git
    
 2. Navega al directorio del proyecto:
+
   ```bash
   cd shopi
 
 3. Instala las dependencias generales:
+
   ```bash
   npm install
 
 6. Levanta el servidor
+
   ```bash
   npm start
 
