@@ -79,7 +79,7 @@ const AppRoutes = () => {
         ),
     },
     {
-      path: "/others",
+      path: "/home",
       element:
         hasUserAnAccount && !isUserSignOut ? (
           <Home />

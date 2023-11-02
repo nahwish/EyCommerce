@@ -15,7 +15,7 @@ function MyOrders() {
         </div>
         {order.map((order, index) => {
           return (
-            <Link to={`/my-orders/${index}`} key={index}>
+            <Link to={`/my-orders/${index}`} key={index} className="w-80">
               <OrdersCard
                 totalPrice={order.totalPrice}
                 totalProducts={order.totalProducts}

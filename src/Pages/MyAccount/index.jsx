@@ -102,7 +102,7 @@ function MyAccount() {
             Your password:
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             defaultValue={parsedAccount.password}

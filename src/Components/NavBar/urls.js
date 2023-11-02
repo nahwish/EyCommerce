@@ -1,7 +1,7 @@
 export const directionLink = [
   { name: "All", url: "/", category: "" },
-  { name: "Others", url: "/others", category: "others" },
-  { name: "Shoes", url: "/shoes", category: "clothes" },
+  { name: "Home", url: "/home", category: "home" },
+  { name: "Shoes", url: "/shoes", category: "clothing" },
   { name: "Electronics", url: "/electronics", category: "electronics" },
 ];
 
