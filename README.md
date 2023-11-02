@@ -48,10 +48,11 @@ Sigue estos pasos para instalar y ejecutar **eyCommercer**:
 6. Levanta el servidor
 
    ```bash
-   npm start
+   npm run dev
 
 
-¡Listo! Ahora puedes utilizar eyCommerce y simular una compra.
+¡Listo! Ahora podés utilizar eyCommerce y simular una compra. en la terminal te va a decir en qué localhost abrir la página,
+deberia verse algo asi : **http://localhost:5173/**
 
 
 Contacto
