@@ -1,16 +1,19 @@
 # 📝 eyCommerce
 
 ## Descripción
-Bienvenido a **TodoApp**, la aplicación que te permite tomar notas y organizarlas. Puedes utilizarla para crear notas sobre compras, gestionar turnos médicos o simplemente tomar notas personales. Con **TodoApp**, puedes ver, editar, eliminar y buscar notas por categoría.
-
-
+**eyCommerce** es una aplicación construida con Reactjs y Tailwind esencialmente, consume una Api de productos que se muestran en forma de Cards. 
 <img src="./public/home.png" alt="Home">
+Podemos guardar productos en el carrito, la informacion se almacena en localstorage y es compartida por los compnentes.
 <img src="./public/shoppingcart.png" alt="Home">
+Dentro de "my orders" se guardará la información, producto y precio individual 
 <img src="./public/checkout.png" alt="Home">
+Tambien se visualiza la cantidad de articulos y los precios totales
 <img src="./public/checkout2.png" alt="Home">
+Tiene un sistema de filtrado rapido para articulos populares
 <img src="./public/filter.png" alt="Home">
+Por ultimo tiene una pantalla de login con redireccionamiento a home si el usuario no ha iniciado sesion
 <img src="./public/myaccount.png" alt="Home">
-<img src="./public/shoppingcart.png" alt="Home">
+
 
 
 
@@ -20,43 +23,23 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 - Navegador web moderno.
 
 ## Instalación
-Sigue estos pasos para instalar y ejecutar **TodoApp**:
+Sigue estos pasos para instalar y ejecutar **eyCommercer**:
 
 1. Clona el repositorio:
    ```bash
-   git clone git@github.com:ensolvers-github-challenges/Rojas-c832a4.git
+   git clone git@github.com:nahwish/EyCommerce.git
 2. Navega al directorio del proyecto:
-cd todo
+cd shopi
 
 3. Instala las dependencias generales:
 npm install
-4. Navega hacia la carpeta Client:
-cd Client
-- Instala las dependencias: 
-npm install
-5. Instala las dependencias del backend:
-Navega hacia la carpeta Server:
-cd Server
--Instala las dependencias:
-npm install
-6. Levanta ambos servidores (frontend y backend):
 
-- Dentro de la carpeta Client:
-npm start
-- Dentro de la carpeta Server:
+6. Levanta el servidor
 npm start
 
-¡Listo! Ahora puedes utilizar TodoApp para tomar notas y organizar tus tareas.
 
-Características
-Creación, edición y eliminación de notas.
-Búsqueda de notas por categoría.
-👉 para el frontend se utilizó React y css
-👉 para el backend express
-👉 para la base de datos postgreSql
-
-
+¡Listo! Ahora puedes utilizar eyCommerce y simular una compra.
 
 
 Contacto
-Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros en [nadaro@outlook.com].# Todo-App
+Si tenés preguntas o comentarios, no dudes en ponerte en contacto con nosotros en [nadaro@outlook.com].# eyCommerce
