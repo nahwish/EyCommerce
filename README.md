@@ -37,18 +37,18 @@ Sigue estos pasos para instalar y ejecutar **eyCommercer**:
    
 2. Navega al directorio del proyecto:
 
-  ```bash
-  cd shopi
+   ```bash
+   cd shopi
 
 3. Instala las dependencias generales:
 
-  ```bash
-  npm install
+   ```bash
+   npm install
 
 6. Levanta el servidor
 
-  ```bash
-  npm start
+   ```bash
+   npm start
 
 
 ¡Listo! Ahora puedes utilizar eyCommerce y simular una compra.
