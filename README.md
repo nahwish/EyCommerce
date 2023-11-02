@@ -5,8 +5,12 @@ Bienvenido a **TodoApp**, la aplicación que te permite tomar notas y organizarl
 
 
 <img src="./public/home.png" alt="Home">
-<img src="./filter/home.png" alt="Home">
-<img src="./public/home.png" alt="Home">
+<img src="./public/shoppingcart.png" alt="Home">
+<img src="./public/checkout.png" alt="Home">
+<img src="./public/checkout2.png" alt="Home">
+<img src="./public/filter.png" alt="Home">
+<img src="./public/myaccount.png" alt="Home">
+<img src="./public/shoppingcart.png" alt="Home">
 
 
 
