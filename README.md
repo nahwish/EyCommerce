@@ -1,7 +1,7 @@
-# 📝 eyCommerce
+# 📝 Shop
 
 ## Descripción
-**eyCommerce** es una aplicación construida con Reactjs y Tailwind esencialmente, consume una Api de productos que se muestran en forma de Cards. 
+**Shop** es una aplicación construida con Reactjs y Tailwind esencialmente, consume una Api de productos que se muestran en forma de Cards. 
 <img src="./public/home.png" alt="Home">
 
 Podemos guardar productos en el carrito, la informacion se almacena en localstorage y es compartida por los compnentes.
